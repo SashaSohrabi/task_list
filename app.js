@@ -1,5 +1,5 @@
 // Define UI Vars
-const form =  document.querySelector('#task-form');
+const form = document.querySelector('#task-form');
 const taskList = document.querySelector('.collection');
 const clearBtn = document.querySelector('.clear-tasks');
 const filter = document.querySelector('#filter');
@@ -12,11 +12,17 @@ loadEventListeners();
 function loadEventListeners() {
     // Add task event
     form.addEventListener('submit', addTask);
+    // Remove task event
+    taskList.addEventListener('click', removeTask);
+    //Clear task event
+    clearBtn.addEventListener('click', clearTasks);
+    //filter tasks event
+    filter.addEventListener('keyup', filterTasks);
 }
 
 // Add Task
 function addTask(e) {
-    if(taskInput.value === '') {
+    if (taskInput.value === '') {
         alert('Add a task');
     }
 
@@ -43,3 +49,13 @@ function addTask(e) {
 
     e.preventDefault();
 }
+
+// Remove Task 
+function removeTask(e) {
+    if (e.target.parentElement.classList.contains('delete-item')) {
+        if (confirm('Are You Sure?')) {
+            e.target.parentElement.parentElement.remove();
+        }
+    }
+}
+
